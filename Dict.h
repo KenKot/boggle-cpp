@@ -7,6 +7,7 @@
 #include <string>
 
 #define CHAR_LEN 26
+#define a_CHAR_CODE 97
 
 class Dict {
    public:
@@ -14,13 +15,10 @@ class Dict {
     int getWordCount();
 
    private:
-    int wordCount = 0;
-    void loadDictFile(const std::string&);
-
     class Node {
        public:
         bool isWord = false;
-        std::string definition = "definition will go here";
+        std::string definition = "";
         Node* letterPointers[CHAR_LEN];
 
         Node() {
@@ -29,6 +27,12 @@ class Dict {
             }
         }
     };
+
+    int wordCount = 0;
+    Node* root = nullptr;
+
+    void loadDictFile(const std::string&);
+    void addWord(const std::string&);
 };
 
 #endif

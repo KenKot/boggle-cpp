@@ -1,12 +1,11 @@
 #include "Dict.h"
+#include <stdexcept>
 
 // #include <iostream>
 // #include <iostream>
 
 Dict::Dict(const std::string& filename) {
-    wordCount = 0;
-    std::string stringa = "from constructor";
-    std::cout << stringa;
+    root = new Node();
 
     loadDictFile(filename);
 }
@@ -24,9 +23,36 @@ void Dict::loadDictFile(const std::string& filename) {
 
     while (inputFile >> word) {
         std::cout << word << std::endl;
+        addWord(word);
     }
 
     inputFile.close();
+}
+
+void Dict::addWord(const std::string& word) {
+    Node* curr = root;
+
+    for (int i = 0; i < word.size(); i++) {
+        int nodeIndex = int(word[i]) - a_CHAR_CODE;
+
+        if (nodeIndex < 0 || nodeIndex > 25) {
+            throw std::runtime_error("Letter index not within 0-25");
+        }
+
+        if (curr->letterPointers[nodeIndex] == nullptr) {
+            Node* newNode = new Node();
+            curr->letterPointers[nodeIndex] = newNode;
+            curr = newNode;
+        } else {
+            curr = curr->letterPointers[nodeIndex];
+        }
+
+        if (i == word.size() - 1) {
+            curr->isWord = true;
+            curr->definition = word + "'s def goes here";
+            wordCount++;
+        }
+    }
 }
 
 int Dict::getWordCount() { return wordCount; }

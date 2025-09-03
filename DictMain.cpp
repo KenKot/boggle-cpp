@@ -3,13 +3,11 @@
 #include "Dict.h"
 
 int main() {
-    std::cout << "1HELLO!";
+    std::cout << "Main starting" << std::endl;
 
     Dict d1("./dictionaries/smalldict1.txt");
-    // std::cout << "main ran";
-    // std::cout << d1.getWordCount();
-    // std::cout << d1.getWordCount();
 
-    std::string a = "word";
-    std::cout << a;
+    std::cout << d1.getWordCount();
+
+    std::cout << "Main ending";
 }
