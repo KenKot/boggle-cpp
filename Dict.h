@@ -2,23 +2,33 @@
 #define DICT_H
 
 // #include <string.h>
-// #include <string>
+#include <fstream>
+#include <iostream>
+#include <string>
+
+#define CHAR_LEN 26
 
 class Dict {
-public:
-    Dict();
+   public:
+    Dict(const std::string&);
     int getWordCount();
 
+   private:
+    int wordCount = 0;
+    void loadDictFile(const std::string&);
 
-private:
-    int wordCount;
-    // String dictFilename;
+    class Node {
+       public:
+        bool isWord = false;
+        std::string definition = "definition will go here";
+        Node* letterPointers[CHAR_LEN];
 
-
-
-
-
+        Node() {
+            for (int i = 0; i < CHAR_LEN; i++) {
+                letterPointers[i] = nullptr;
+            }
+        }
+    };
 };
-
 
 #endif
