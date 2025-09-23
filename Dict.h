@@ -14,7 +14,6 @@ class Dict {
     Dict(const std::string&);
     int getWordCount();
 
-   private:
     class Node {
        public:
         bool isWord = false;
@@ -27,6 +26,22 @@ class Dict {
             }
         }
     };
+
+    Dict::Node* getRoot();
+
+   private:
+    // class Node {
+    //    public:
+    //     bool isWord = false;
+    //     std::string definition = "";
+    //     Node* letterPointers[CHAR_LEN];
+    //
+    //     Node() {
+    //         for (int i = 0; i < CHAR_LEN; i++) {
+    //             letterPointers[i] = nullptr;
+    //         }
+    //     }
+    // };
 
     int wordCount = 0;
     Node* root = nullptr;

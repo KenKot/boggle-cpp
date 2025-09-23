@@ -5,6 +5,7 @@ atom
 bat
 bath
 baton
+cap
 cat
 cater
 caterpillar
@@ -22,3 +23,6 @@ fantasy
 far
 fast
 fat
+quack
+kat
+x
