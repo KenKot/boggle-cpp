@@ -50,7 +50,7 @@ void Dict::addWord(const std::string& word) {
 
         if (i == word.size() - 1) {
             curr->isWord = true;
-            curr->definition = word + "'s def goes here";
+            curr->definition =  "defffyy";
             wordCount++;
         }
     }
