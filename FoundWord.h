@@ -8,6 +8,7 @@ class FoundWord {
    public:
     FoundWord(const std::string &word, const std::string &definition, const std::vector<std::pair<int, int>> &path);
 
+    // to use in 'std::set'
     bool operator<(const FoundWord& other) const;
 
     void print() const;

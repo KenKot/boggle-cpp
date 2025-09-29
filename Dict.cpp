@@ -1,9 +1,5 @@
 #include "Dict.h"
-
 #include <stdexcept>
-
-// #include <iostream>
-// #include <iostream>
 
 Dict::Dict(const std::string& filename) {
     root = new Node();
@@ -56,28 +52,6 @@ void Dict::addWord(const std::string& word) {
     }
 }
 
-// go back to use ENUM
-// -1 = dead
-// 0 = prefix
-// 1 = word
-// int Dict::CheckWord(const std::string& word) {
-//     Node* curr = root;
-//
-//     for (int i = 0; i < word.size(); i++) {
-//         int nodeIndex = int(word[i] - a_CHAR_CODE);
-//
-//         if (nodeIndex < 0 || nodeIndex > 25) {
-//             throw std::runtime_error("Letter index not within 0-25");
-//         }
-//
-//         if (curr->letterPointers[nodeIndex] == nullptr) {
-//             return -1;
-//         }
-//
-//         curr = curr->letterPointers[nodeIndex];
-//     }
-//     return curr->isWord ? 1 : 0;
-// }
 
 int Dict::getWordCount() { return wordCount; }
 Dict::Node* Dict::getRoot() { return root; }

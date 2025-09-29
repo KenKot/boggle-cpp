@@ -5,6 +5,8 @@
 
 #include "Dict.h"
 #include "FoundWord.h"
+#include "Solver.h"
+#include "Board.h"
 
 void dfs(int row, int col, Dict::Node* currNode, std::string& currPrefix,
          std::string board[2][3], std::set<FoundWord> &wordsFound, std::vector<std::pair<int, int>> &currPath) {
@@ -67,6 +69,7 @@ int main() {
     board[1][1] = "c";
     board[1][2] = "k";
 
+
     Dict::Node* root = d1.getRoot();
     std::string currPrefix = "";
 
@@ -84,5 +87,20 @@ int main() {
         word.print();
     }
 
-    std::cout << "Main ending" << std::endl;
+    std::cout << "\n\n\n" << std::endl;
+
+
+
+
+    std::vector<std::vector<std::string>> b1input = {
+        {"c", "a", "t"},
+        {"th", "e", "n"}
+    };
+    Board b1(b1input);
+    b1.printBoard();
+
+
+
+
+
 }
