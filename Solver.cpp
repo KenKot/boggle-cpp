@@ -1,41 +1,34 @@
 #include "Solver.h"
+#include <utility>
+#include <set>
+#include <string>
+#include <vector>
 
 Solver::Solver(Dict& d) : dict(d){
 }
 
-std::set<FoundWord> Solver::getFoundWords(const Board &board) {
-    const int ROW_COUNT = board.getRowCount();
-    const int COL_COUNT = board.getColCount();
-
+std::set<FoundWord> Solver::getFoundWords(Board &board) {
     std::string currPrefix = "";
+    std::vector<std::pair<int, int>> currPath;
     Dict::Node* root = dict.getRoot();
     std::set<FoundWord> wordsFound;
 
-    for (int r = 0; r < ROW_COUNT; r++) {
-        for (int c = 0; c < COL_COUNT; c++) {
-            dfs(r, c, root, wordsFound, currPath);
+    // std::cout << "!" << board.getRowCount() << " " << board.getColCount() << "\n";
+
+    for (int r = 0; r < board.getRowCount(); r++) {
+        for (int c = 0; c < board.getColCount(); c++) {
+            dfs(r, c, root, currPrefix, board, wordsFound, currPath);
         }
     }
 
-    
-
+    return wordsFound;
 
 }
 
 
+void Solver::dfs(int row, int col, Dict::Node* currNode, std::string& currPrefix, Board& board, std::set<FoundWord> &wordsFound, std::vector<std::pair<int, int>> &currPath) {
+    std::string cellStr = board.getCellValue(row, col);
 
-
-
-void dfs(int row, int col, Dict::Node* currNode, std::string& currPrefix,
-         std::string board[2][3], std::set<FoundWord> &wordsFound, std::vector<std::pair<int, int>> &currPath) {
-    // bounds
-    if (row < 0 || col < 0) return;
-    if (row >= 2 || col >= 3) return; 
-
-    // "*" means cell is visited
-    if (board[row][col] == "*") return;
-
-    std::string cellStr = board[row][col];
     Dict::Node* next = currNode;
 
     for (char ch : cellStr) {
@@ -44,27 +37,30 @@ void dfs(int row, int col, Dict::Node* currNode, std::string& currPrefix,
         next = next->letterPointers[idx];
         if (!next) return;  // ex: ensures both "q" and "u" are in path for "qu"
     }
-    board[row][col] = "*";  // mark visited
+
+    // mark visited
+    board.markVisited(row, col);
 
     currPath.emplace_back(row, col);
     currPrefix += cellStr;
 
     if (next->isWord) {
-        // wordsFound.insert(currPrefix);
         wordsFound.insert(FoundWord(currPrefix, next->definition, currPath));
     }
 
-    dfs(row - 1, col, next, currPrefix, board, wordsFound, currPath); 
-    dfs(row - 1, col + 1, next, currPrefix, board, wordsFound, currPath); 
-    dfs(row, col + 1, next, currPrefix, board, wordsFound, currPath);    
-    dfs(row + 1, col + 1, next, currPrefix, board, wordsFound, currPath);
-    dfs(row + 1, col, next, currPrefix, board, wordsFound, currPath);   
-    dfs(row + 1, col - 1, next, currPrefix, board, wordsFound, currPath);
-    dfs(row, col - 1, next, currPrefix, board, wordsFound, currPath);   
-    dfs(row - 1, col - 1, next, currPrefix, board, wordsFound, currPath);
+    for (const std::pair<int, int>& move : moves) {
+        int nextRow = move.first + row;
+        int nextCol = move.second + col;
+
+        // checks if in-bounds and not-visited
+        if (board.isValidMove(nextRow, nextCol)) {
+            dfs(nextRow, nextCol, next, currPrefix, board, wordsFound, currPath); 
+        }
+    }
 
     // backtrack
     currPrefix.resize(currPrefix.size() - cellStr.size());
     currPath.pop_back();
-    board[row][col] = cellStr; 
+
+    board.setCellValue(row, col, cellStr);
 }

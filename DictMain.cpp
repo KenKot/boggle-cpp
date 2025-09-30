@@ -90,14 +90,23 @@ int main() {
     std::cout << "\n\n\n" << std::endl;
 
 
-
+    std::cout << "-----------\n";
+    std::cout << "-----------\n";
+    std::cout << "-----------\n";
 
     std::vector<std::vector<std::string>> b1input = {
-        {"c", "a", "t"},
-        {"th", "e", "n"}
+        {"qu", "a", "t"},
+        {"x", "c", "k"}
     };
+
     Board b1(b1input);
     b1.printBoard();
+
+    Solver s1(d1);
+
+    std::set<FoundWord> answers = s1.getFoundWords(b1);
+    for (auto word : answers)
+        word.print();
 
 
 

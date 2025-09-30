@@ -1,7 +1,7 @@
 #include "FoundWord.h"
 #include <iostream>
 
-FoundWord::FoundWord(const std::string &word, const std::string &definition, const std::vector<std::pair<int, int>> &path) {
+FoundWord::FoundWord( std::string &word, const std::string &definition, const std::vector<std::pair<int, int>> &path) {
     this->word = word;
     this->definition = definition;
     this->path = path;
