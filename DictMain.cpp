@@ -1,7 +1,6 @@
 #include <iostream>
 #include <string>
 #include <vector>
-#include <set>
 
 #include "Dict.h"
 #include "FoundWord.h"
