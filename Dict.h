@@ -12,7 +12,9 @@
 class Dict {
    public:
     Dict(const std::string&);
-    int getWordCount();
+    ~Dict();
+
+    int getWordCount() const;
 
     class Node {
        public:
@@ -27,27 +29,16 @@ class Dict {
         }
     };
 
-    Dict::Node* getRoot();
+    Dict::Node* getRoot() const;
 
    private:
-    // class Node {
-    //    public:
-    //     bool isWord = false;
-    //     std::string definition = "";
-    //     Node* letterPointers[CHAR_LEN];
-    //
-    //     Node() {
-    //         for (int i = 0; i < CHAR_LEN; i++) {
-    //             letterPointers[i] = nullptr;
-    //         }
-    //     }
-    // };
-
     int wordCount = 0;
     Node* root = nullptr;
 
     void loadDictFile(const std::string&);
     void addWord(const std::string&);
+
+    void destroy(Node* root);
 };
 
 #endif

@@ -53,5 +53,19 @@ void Dict::addWord(const std::string& word) {
 }
 
 
-int Dict::getWordCount() { return wordCount; }
-Dict::Node* Dict::getRoot() { return root; }
+int Dict::getWordCount() const { return wordCount; }
+Dict::Node* Dict::getRoot() const { return root; }
+
+void Dict::destroy(Node* node) {
+    if (node == nullptr) return;
+
+    for (int i = 0; i < CHAR_LEN; i++) {
+        destroy(node->letterPointers[i];
+    }
+
+    delete node;
+}
+
+Dict::~Dict() {
+    destroy(root);
+}
