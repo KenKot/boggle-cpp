@@ -60,7 +60,7 @@ void Dict::destroy(Node* node) {
     if (node == nullptr) return;
 
     for (int i = 0; i < CHAR_LEN; i++) {
-        destroy(node->letterPointers[i];
+        destroy(node->letterPointers[i]);
     }
 
     delete node;
