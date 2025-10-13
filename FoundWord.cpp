@@ -5,10 +5,13 @@ FoundWord::FoundWord( std::string &word, const std::string &definition, const st
     this->word = word;
     this->definition = definition;
     this->path = path;
+    this->wordLen = word.length();
+
+    this->score = calcScore();
 }
 
 void FoundWord::print() const {
-    std::cout << word << " " << definition;
+    std::cout << word << " " << score << "pts - " << definition;
 
     for (auto& coord : path)
         std::cout << " (" << coord.first << ", " << coord.second << ") ";
@@ -21,3 +24,19 @@ bool FoundWord::operator<(const FoundWord& other) const {
     return word < other.word;
 }
 
+int FoundWord::calcScore(){
+    if (wordLen < 3) {
+        return 0;
+    } else if (wordLen == 3 || wordLen == 4) {
+        return 1;
+    } else if (wordLen == 5) {
+        return 2;
+    } else if (wordLen == 6) {
+        return 3;
+    } else if (wordLen == 7) {
+        return 5;
+    } else {
+        // 8 or more is == points
+        return 11;
+    }
+}

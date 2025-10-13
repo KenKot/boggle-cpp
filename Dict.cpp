@@ -3,7 +3,6 @@
 
 Dict::Dict(const std::string& filename) {
     root = new Node();
-
     loadDictFile(filename);
 }
 
@@ -32,7 +31,7 @@ void Dict::addWord(const std::string& word) {
     for (int i = 0; i < word.size(); i++) {
         int nodeIndex = int(word[i]) - a_CHAR_CODE;
 
-        if (nodeIndex < 0 || nodeIndex > 25) {
+        if (nodeIndex < 0 || nodeIndex >= CHAR_LEN) {
             throw std::runtime_error("Letter index not within 0-25");
         }
 

@@ -17,6 +17,10 @@ class FoundWord {
     std::string word;
     std::string definition;
     std::vector<std::pair<int, int>> path;
+
+    int wordLen;
+    int score;
+    int calcScore();
 };
 
 #endif
