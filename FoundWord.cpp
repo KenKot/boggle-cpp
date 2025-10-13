@@ -6,7 +6,6 @@ FoundWord::FoundWord( std::string &word, const std::string &definition, const st
     this->definition = definition;
     this->path = path;
     this->wordLen = word.length();
-
     this->score = calcScore();
 }
 
@@ -36,7 +35,7 @@ int FoundWord::calcScore(){
     } else if (wordLen == 7) {
         return 5;
     } else {
-        // 8 or more is == points
+        // 8 or more is 11 points
         return 11;
     }
 }
