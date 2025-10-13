@@ -7,6 +7,7 @@
 
 #define CHAR_LEN 26
 #define a_CHAR_CODE 97
+#define TXT_FILE_DELIMITER ":"
 
 class Dict {
    public:
@@ -35,7 +36,7 @@ class Dict {
     Node* root = nullptr;
 
     void loadDictFile(const std::string&);
-    void addWord(const std::string&);
+    void addWord(const std::string&, const std::string&);
 
     void destroy(Node* root);
 };

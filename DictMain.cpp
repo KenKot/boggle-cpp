@@ -26,4 +26,14 @@ int main() {
         word.print();
 
 
+    std::cout << "\ncleaned dict test\n\n";
+
+    Dict d2("./dictionaries/cleanedDict.txt");
+    Board b2(b1input);
+    Solver s2(d2);
+
+
+    answers = s2.getFoundWords(b1);
+    for (auto word : answers)
+        word.print();
 }

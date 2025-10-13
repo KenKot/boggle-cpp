@@ -15,17 +15,29 @@ void Dict::loadDictFile(const std::string& filename) {
         return;
     }
 
+    std::string line; // abaft: Toward the stern; aft; as to go
     std::string word;
+    std::string definition;
+    // int delimiterIndex;
 
-    while (inputFile >> word) {
-        std::cout << word << std::endl;
-        addWord(word);
+    while (std::getline(inputFile, line)) {
+        std::size_t delimiterIndex = line.find(TXT_FILE_DELIMITER); // e.g., ':'
+        word = line.substr(0, delimiterIndex);
+        definition = line.substr(delimiterIndex + 1);
+
+        // std::cout<<"word is : " << word << std::endl;
+        // std::cout<<"def is : " << definition << std::endl;
+        
+
+
+        
+        addWord(word, definition);
     }
 
     inputFile.close();
 }
 
-void Dict::addWord(const std::string& word) {
+void Dict::addWord(const std::string& word, const std::string& definition) {
     Node* curr = root;
 
     for (int i = 0; i < word.size(); i++) {
@@ -45,7 +57,7 @@ void Dict::addWord(const std::string& word) {
 
         if (i == word.size() - 1) {
             curr->isWord = true;
-            curr->definition =  "defffyy";
+            curr->definition =  definition;
             wordCount++;
         }
     }
