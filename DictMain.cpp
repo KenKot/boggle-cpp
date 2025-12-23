@@ -16,6 +16,7 @@ int main() {
         {"x", "c", "k"}
     };
 
+
     Board b1(b1input);
     b1.printBoard();
 
@@ -28,7 +29,9 @@ int main() {
 
     std::cout << "\ncleaned dict test\n\n";
 
-    Dict d2("./dictionaries/cleanedDict.txt");
+
+    //Dict d2("./dictionaries/cleanedDict.txt");  // has words of len 2
+    Dict d2("./dictionaries/cleanDictDec.txt"); // removed words w/ less than len of 3
     Board b2(b1input);
     Solver s2(d2);
 
