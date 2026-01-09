@@ -7,8 +7,8 @@ all:
 		-s EXPORTED_RUNTIME_METHODS='["FS","callMain","ccall","lengthBytesUTF8","stringToUTF8"]' \
 		-std=c++17 \
 		--preload-file dictionaries@/dictionaries \
-		-o web/boggle.js
+		-o web/src/boggle.js
 
 clean:
-	rm -f web/boggle.js web/boggle.wasm web/boggle.data
+	rm -f web/src/boggle.js web/src/boggle.wasm web/src/boggle.data
 
